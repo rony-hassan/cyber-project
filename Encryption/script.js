@@ -67,3 +67,42 @@ function transpositionEncrypt(text) {
 function transpositionDecrypt(text) {
     return transpositionEncrypt(text);
 }
+
+function checkKeyStrength(){
+    const key = document.getElementById('key').value;
+    const strengthText = document.getElementById('strength');
+    strengthText.style.display = "block";
+
+    let strength = 0;
+
+    if(key.length >=8){
+        strength++;
+    }
+
+    if(/[a-z]/.test(key)){
+        strength++;
+    }
+
+    if(/[A-Z]/.test(key)){
+        strength++;
+    }
+
+    if(/[0-9]/.test(key)){
+        strength++;
+    }
+
+    if(/[^A-Za-z0-9]/.test(key)){
+        strength++;
+    }
+
+    if(strength <=2){
+        strengthText.textContent = "Key strength: Weak";
+        strengthText.className = "weak";
+    }else if(strength ===3){
+        strengthText.textContent = "Key strength: Medium";
+        strengthText.className = "medium";
+    }else{
+        strengthText.textContent = "Key strength: Strong";
+        strengthText.className = "strong";
+    }
+}

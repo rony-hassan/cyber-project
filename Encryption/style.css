@@ -53,3 +53,22 @@ button{
 button:hover {
     background-color: #45a049;
 }
+
+p{
+    display: none;
+    font-weight: bold;
+    font-size: 14px;
+    margin-bottom: 10px;
+    text-align: right;
+    padding-left: 10px;
+}
+
+.weak{
+    color:red;
+}
+.medium{
+    color: orange;
+}
+.strong{
+    color:green;
+}

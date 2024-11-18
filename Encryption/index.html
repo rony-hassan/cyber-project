@@ -17,7 +17,8 @@
             <textarea id="plaintext" rows="4" placeholder="Type your text here..."></textarea>
 
             <label for="key">Enter key: </label>
-            <input type="text" id="key" placeholder="Type your key here...">
+            <input type="password" id="key" placeholder="Type your key here..." onkeyup="checkKeyStrength()">
+            <p id="strength">Key Strength: </p>
 
             <button type="button" onclick="encryptText()">Encrypt</button>
             <button type="button" onclick="decryptText()">Decrypt</button>
