@@ -12,6 +12,7 @@ function encryptText(){
     const result = transpositionEncrypt(substitutedText);
 
     document.getElementById('output').value = result;
+    document.getElementById('message').innerText = "Encrypted Text: ";
 }
 
 function decryptText(){
@@ -28,6 +29,7 @@ function decryptText(){
     const result = ceaserCipher(transposedText, -shift);
 
     document.getElementById('output').value = result;
+    document.getElementById('message').innerText = "Plain Text: ";
 }
 
 function ceaserCipher(text, shift){
