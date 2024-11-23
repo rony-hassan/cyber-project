@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Text Encyption & Decryption</title>
+    <title>Text Encryption & Decryption</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -12,12 +12,14 @@
         <h1>Text Encryption & Decryption</h1>
 
         <form id="encryption-form">
-
             <label for="plaintext">Enter Plain Text: </label>
             <textarea id="plaintext" rows="4" placeholder="Type your text here..."></textarea>
 
             <label for="key">Enter key: </label>
-            <input type="password" id="key" placeholder="Type your key here..." onkeyup="checkKeyStrength()">
+            <div class="key-input-container">
+                <input type="password" id="key" placeholder="Type your key here..." onkeyup="checkKeyStrength()">
+                <span class="eye-icon" onclick="toggleKeyVisibility()">👁️</span>
+            </div>
             <p id="strength">Key Strength: </p>
 
             <button type="button" onclick="encryptText()">Encrypt</button>
@@ -25,7 +27,6 @@
 
             <label for="output" id="message">Output: </label>
             <textarea id="output" rows="4" readonly></textarea>
-
         </form>
     </div>
 

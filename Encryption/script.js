@@ -1,6 +1,16 @@
+encryptionKey = "";
+originalPlaintext = "";
+
 function encryptText(){
     const plaintext = document.getElementById('plaintext').value;
     const key = document.getElementById('key').value;
+
+    document.getElementById('strength').style.display = "none";
+
+    if (!isStrongKey()) {
+        alert("The key strength is weak. Please enter a stronger key.");
+        return;
+    }
 
     if(!key){
         alert("Please enter a key for encryption.");
@@ -11,16 +21,27 @@ function encryptText(){
     const substitutedText = ceaserCipher(plaintext, shift);
     const result = transpositionEncrypt(substitutedText);
 
+    encryptionKey = key;
+    originalPlaintext = plaintext;
+
     document.getElementById('output').value = result;
     document.getElementById('message').innerText = "Encrypted Text: ";
 }
 
-function decryptText(){
+function decryptText() {
     const ciphertext = document.getElementById('plaintext').value;
     const key = document.getElementById('key').value;
 
-    if(!key){
+    document.getElementById('strength').style.display = "none";
+
+    if (!key) {
         alert("Please enter the key for decryption.");
+        return;
+    }
+
+    if (key !== encryptionKey) {
+        alert("The provided key is incorrect. Decryption failed.");
+        document.getElementById('output').value = ""; // Clear the output box
         return;
     }
 
@@ -30,6 +51,20 @@ function decryptText(){
 
     document.getElementById('output').value = result;
     document.getElementById('message').innerText = "Plain Text: ";
+}
+
+function isStrongKey() {
+    const key = document.getElementById('key').value;
+    let strength = 0;
+
+    if (key.length >= 8) strength++;
+    if (/[a-z]/.test(key)) strength++;
+    if (/[A-Z]/.test(key)) strength++;
+    if (/[0-9]/.test(key)) strength++;
+    if (/[^A-Za-z0-9]/.test(key)) strength++;
+
+    // Key is strong if it has a strength of 4 or more
+    return strength >= 3;
 }
 
 function ceaserCipher(text, shift){
@@ -44,6 +79,18 @@ function ceaserCipher(text, shift){
         }
         return char;
     }).join('');
+}
+
+function toggleKeyVisibility() {
+    const keyInput = document.getElementById('key');
+    const eyeIcon = document.querySelector('.eye-icon');
+    if (keyInput.type === 'password') {
+        keyInput.type = 'text';
+        eyeIcon.textContent = '🙈';
+    } else {
+        keyInput.type = 'password';
+        eyeIcon.textContent = '👁️';
+    }
 }
 
 function calculateShift(key){
